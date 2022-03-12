@@ -15,6 +15,8 @@ client.set_missing_host_key_policy(paramiko.AutoAddPolicy)
 DB_PATH = "/var/log/openvpn/ovpn.db"
 # DB_PATH = "/home/mrandersen/openvpn.db"
 OPENVPN_LOG = "/var/log/openvpn/status.log"
+
+
 # OPENVPN_LOG = "/home/mrandersen/test.log"
 
 
@@ -144,7 +146,7 @@ def write_status_log_data(raw, db_path):
     connection.commit()
     connection.close()
 
-    return array
+    return len(array)
 
 
 def parse_log(log_contents):
@@ -178,6 +180,7 @@ if __name__ == '__main__':
 
     data = get_log_data_local(OPENVPN_LOG)
     data = parse_log(data)
-    write_status_log_data(data, DB_PATH)
+    wrote = write_status_log_data(data, DB_PATH)
+    print("Wrote {}".format(wrote))
 
     exit(0)
