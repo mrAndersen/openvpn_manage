@@ -1,3 +1,5 @@
+#!/bin/python3
+
 import re
 import paramiko
 import hashlib
